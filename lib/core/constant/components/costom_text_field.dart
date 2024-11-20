@@ -9,7 +9,7 @@ class CustomTextField extends StatelessWidget {
     this.keyboardType = TextInputType.name,
     this.icon,
     this.iconPrifex,
-    this.padding = 10,
+    this.padding = 2,
     required this.hintText,
     required this.isVissabileContent,
     required this.validate,
@@ -45,19 +45,19 @@ class CustomTextField extends StatelessWidget {
             suffix: iconPrifex,
             prefixIcon: icon,
             focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(8),
                 borderSide: BorderSide(
-                    color: AppColor.neutralsColor.withOpacity(0.5), width: 2)),
+                    color: AppColor.neutralsColor.withOpacity(0.3), width: 2)),
             enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(8),
                 borderSide:
-                    BorderSide(color: AppColor.neutralsColor.withOpacity(0.5))),
+                    BorderSide(color: AppColor.neutralsColor.withOpacity(0.3))),
             border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(8),
                 borderSide:
-                    BorderSide(color: AppColor.neutralsColor.withOpacity(0.5))),
+                    BorderSide(color: AppColor.neutralsColor.withOpacity(0.3))),
             disabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(8),
                 borderSide: BorderSide(
                     color: AppColor.neutralsColor.withOpacity(0.5)))),
       ),

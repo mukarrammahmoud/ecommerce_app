@@ -34,8 +34,8 @@ class CategoryViewBody extends StatelessWidget {
                 itemCount: isLoading ? 6 : state.category.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  mainAxisSpacing: 40,
-                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 50,
+                  crossAxisSpacing: 20,
                 ),
                 itemBuilder: (context, index) {
                   if (isLoading) {

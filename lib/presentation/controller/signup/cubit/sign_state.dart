@@ -9,7 +9,7 @@ class SignState extends Equatable {
     required this.passwordController,
     this.masegeState = '',
     this.showPassword = true,
-    this.checkTerm = false,
+    this.checkTerm = true,
     this.isIntenetConection = true,
   });
   final GlobalKey<FormState> formKey;

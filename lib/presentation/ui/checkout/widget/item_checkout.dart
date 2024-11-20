@@ -1,8 +1,7 @@
 import 'package:first_app/core/constant/app_colors.dart';
-import 'package:first_app/core/constant/components/custom_button.dart';
+import 'package:first_app/core/constant/app_image.dart';
 import 'package:first_app/core/constant/components/custom_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ItemChecOut extends StatelessWidget {
   const ItemChecOut({super.key});
@@ -10,49 +9,66 @@ class ItemChecOut extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: ScreenUtil().screenWidth,
-      margin: EdgeInsets.all(5.w),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        color: AppColor.splashColor.withOpacity(.8),
+      ),
+      margin: const EdgeInsets.all(10),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Flexible(
-            flex: 2,
+          Container(
+            width: 100,
+            height: 100,
+            padding: const EdgeInsets.all(8),
+            margin: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: AppColor.warrningColor.withOpacity(.5),
+              borderRadius: BorderRadius.circular(10),
+            ),
             child: Image.asset(
-              "assets/image/shirt.png",
-              width: 80.w,
-              height: 100.h,
-              fit: BoxFit.contain,
+              AppImages.ja,
             ),
           ),
-          Flexible(
-            flex: 3,
+          Expanded(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppText(
-                  text: "Mens Clothes",
-                  fontSize: 16.sp,
-                  isBold: true,
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: AppText(
+                    text: "Mens Clothes",
+                    isBold: true,
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
                 ),
                 Row(
                   children: [
-                    Expanded(
-                      child: CustomButton(
-                        marginHorizntal: 15,
-                        onPressed: () {},
-                        color: AppColor.successColor.withOpacity(0.5),
-                        title: const AppText(text: ""),
+                    Container(
+                      height: 33,
+                      width: 33,
+                      decoration: BoxDecoration(
+                        color: AppColor.successColor.withOpacity(.5),
+                        borderRadius: BorderRadius.circular(8),
                       ),
                     ),
-                    Expanded(
-                      child: CustomButton(
-                        marginHorizntal: 10,
-                        onPressed: () {},
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      height: 33,
+                      width: 50,
+                      decoration: BoxDecoration(
                         color: Colors.black,
-                        title: const AppText(
-                          text: "M",
-                          textColor: AppColor.splashColor,
-                        ),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: const AppText(
+                        text: "M",
+                        isBold: true,
+                        textColor: AppColor.splashColor,
                       ),
                     ),
                   ],
@@ -60,16 +76,24 @@ class ItemChecOut extends StatelessWidget {
               ],
             ),
           ),
-          Flexible(
-            flex: 2,
-            child:
-                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              AppText(
-                text: "92",
-                fontSize: 18.sp,
+          const Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              SizedBox(
+                height: 40,
               ),
-            ]),
-          ),
+              Padding(
+                padding: EdgeInsets.only(right: 10),
+                child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: AppText(
+                      text: "92(2)",
+                      textColor: AppColor.priomaryColorApp,
+                      isBold: true,
+                    )),
+              ),
+            ],
+          )
         ],
       ),
     );

@@ -1,9 +1,11 @@
-
+import 'package:first_app/core/constant/app_colors.dart';
+import 'package:first_app/core/constant/app_image.dart';
 import 'package:first_app/core/enum/enum_status.dart';
 import 'package:first_app/presentation/controller/cart/cubit/cart_cubit.dart';
 import 'package:first_app/presentation/ui/cart/widgets/cart_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class SliverListCart extends StatelessWidget {
@@ -21,7 +23,12 @@ class SliverListCart extends StatelessWidget {
             builder: (context, state) {
               bool isLoading = state.requestStatus == RequestStatus.loading &&
                   state.prodects.isEmpty;
-
+              if (isLoading == true) {
+                return SliverToBoxAdapter(
+                  child: Lottie.asset(AppImages.loadingAnimation,
+                      height: 100, width: 200),
+                );
+              }
               return SliverToBoxAdapter(
                 child: SizedBox(
                   height: 300,
@@ -40,8 +47,27 @@ class SliverListCart extends StatelessWidget {
                             ),
                           );
                         } else {
+                          List containerColors = [
+                            AppColor.successColor.withOpacity(0.6),
+                            Colors.grey.withOpacity(0.6),
+                            AppColor.warrningColor.withOpacity(0.6),
+                            AppColor.neutralsColor.withOpacity(0.6),
+                          ];
                           return CartItem(
-                            index: index,
+                            color:
+                                containerColors[index % containerColors.length],
+                            removeItem: () {
+                              context.read<CartCubit>().removeItem(index);
+                            },
+                            onDecreaseCounter: () {
+                              context.read<CartCubit>().decreaseCounter(index);
+                            },
+                            onPressed: () {
+                              context.read<CartCubit>().increaseCounter(index);
+                            },
+                            price: 9,
+                            quantity: state.count[index],
+                            stateIndex: state.index,
                             prodectFromCart: state.prodects.elementAt(index),
                           );
                         }
@@ -57,4 +83,3 @@ class SliverListCart extends StatelessWidget {
     );
   }
 }
-

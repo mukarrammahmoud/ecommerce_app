@@ -9,49 +9,85 @@ class CardWishList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        color: AppColor.splashColor.withOpacity(.8),
+      ),
       margin: const EdgeInsets.all(10),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Expanded(
+          Container(
+            width: 100,
+            height: 100,
+            padding: const EdgeInsets.all(8),
+            margin: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: AppColor.warrningColor.withOpacity(.5),
+              borderRadius: BorderRadius.circular(10),
+            ),
             child: Image.asset(
-              AppImages.shirt,
+              AppImages.ja,
             ),
           ),
-          const Expanded(
+          Expanded(
             child: Column(
-              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                AppText(
-                  text: "Mens Clothes",
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: AppText(
+                    text: "Mens Clothes",
+                    isBold: true,
+                  ),
                 ),
-                AppText(
-                  text: "Blue M",
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: AppText(
+                    text: "Blue M",
+                    isBold: true,
+                    textColor: AppColor.neutralsColor.withOpacity(.3),
+                  ),
                 ),
-                AppText(
-                  text: "\$99",
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: AppText(
+                    text: "\$99",
+                    isBold: true,
+                  ),
                 ),
               ],
             ),
           ),
-          Expanded(
-              child: Column(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              const Icon(
-                Icons.favorite_border_outlined,
+              const Padding(
+                padding: EdgeInsets.only(right: 10),
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Icon(
+                    Icons.favorite,
+                    color: AppColor.priomaryColorApp,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
               ),
               CustomButton(
                 color: Colors.black,
                 onPressed: () {},
+                marginHorizntal: 0,
                 title: const AppText(
                   text: "Add to Cart",
                   textColor: AppColor.splashColor,
-                  fontSize: 10,
+                  isBold: true,
                 ),
               )
             ],
-          ))
+          )
         ],
       ),
     );

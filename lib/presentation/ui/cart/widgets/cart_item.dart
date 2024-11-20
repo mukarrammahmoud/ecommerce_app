@@ -1,182 +1,133 @@
-// import 'package:first_app/core/constant/components/custom_button.dart';
-// import 'package:first_app/core/constant/components/custom_text.dart';
-// import 'package:first_app/core/constant/functions/buton.dart';
-// import 'package:flutter/material.dart';
-
-// class CartItem extends StatelessWidget {
-//   const CartItem({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       width: double.infinity,
-//       margin: const EdgeInsets.all(5),
-//       child: Row(
-//         children: [
-//           Expanded(
-//             child: Image.asset(
-//               "assets/image/shirt.png",
-//               width: 30,
-//               height: 50,
-//             ),
-//           ),
-//           const Expanded(
-//             flex: 1,
-//             child: Column(
-//               // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//               children: [
-//                 AppText(
-//                   text: "Mens Clothes",
-//                 ),
-//                 AppText(
-//                   text: "Blue M",
-//                 ),
-//                 AppText(
-//                   text: "\$99",
-//                 ),
-//               ],
-//             ),
-//           ),
-//           Expanded(
-//               child: Column(
-//             children: [
-//               const Icon(
-//                 Icons.delete,
-//                 color: Colors.red,
-//               ),
-//               CustomButton(
-//                 marginHorizntal: 0,
-//                 width: 0,
-//                 color: const Color(0xffEEEEEE),
-//                 onPressed: () {},
-//                 title: Row(
-//                   children: [
-//                     buttonCart(
-//                         icon: Icons.remove,
-//                         onPressed: () {
-//                           // context
-//                           // .read<DetailsProdectCubit>()
-//                           // .decreaseCounter();
-//                         }),
-//                     const AppText(text: "${1}"),
-//                     buttonCart(
-//                         icon: Icons.add,
-//                         onPressed: () {
-//                           //   context
-//                           //       .read<DetailsProdectCubit>()
-//                           //       .increaseCounter();
-//                           //
-//                         }),
-//                   ],
-//                 ),
-//               ),
-//             ],
-//           ))
-//         ],
-//       ),
-//     );
-//   }
-// }
+import 'package:first_app/core/constant/app_colors.dart';
 import 'package:first_app/core/constant/components/custom_button.dart';
 import 'package:first_app/core/constant/components/custom_text.dart';
 import 'package:first_app/core/constant/functions/buton.dart';
-import 'package:first_app/domain/entities/prodect_from_cart.dart';
-import 'package:first_app/presentation/controller/cart/cubit/cart_cubit.dart';
+import 'package:first_app/data/model/cart_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CartItem extends StatelessWidget {
   const CartItem({
     super.key,
     required this.prodectFromCart,
-    required this.index,
+    required this.quantity,
+    required this.color,
+    required this.price,
+    required this.stateIndex,
+    required this.onPressed,
+    required this.onDecreaseCounter,
+    required this.removeItem,
   });
-  final ProdectFromCart prodectFromCart;
-  final int index;
+  final Color color;
+  final Product prodectFromCart;
+  final int stateIndex;
+  final int quantity;
+  final int price;
+  final void Function()? onPressed;
+  final void Function()? removeItem;
+  final void Function()? onDecreaseCounter;
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CartCubit, CartState>(
-      builder: (context, state) {
-        return Container(
-          width: ScreenUtil().screenWidth,
-          margin: EdgeInsets.all(5.w),
-          child: Row(
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        color: AppColor.splashColor.withOpacity(.8),
+      ),
+      margin: const EdgeInsets.all(10),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 100,
+            height: 100,
+            padding: const EdgeInsets.all(8),
+            margin: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color:color,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Image.network(
+              prodectFromCart.thumbnail,
+              fit: BoxFit.fitWidth,
+            ),
+          ),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: AppText(
+                    text: prodectFromCart.title,
+                    isBold: true,
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: AppText(
+                    text: (quantity * prodectFromCart.price).toStringAsFixed(2),
+                    isBold: true,
+                    textColor: AppColor.neutralsColor.withOpacity(.3),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: AppText(
+                    text: "\$${prodectFromCart.price}",
+                    isBold: true,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Flexible(
-                flex: 2,
-                child: Image.asset(
-                  "assets/image/shirt.png",
-                  width: 80.w,
-                  height: 100.h,
-                  fit: BoxFit.contain,
-                ),
-              ),
-              Flexible(
-                flex: 3,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AppText(
-                      text: "Mens Clothes",
-                      fontSize: 16.sp,
-                      isBold: true,
-                    ),
-                    AppText(
-                      text: "Blue M",
-                      fontSize: 14.sp,
-                    ),
-                    AppText(
-                      text: "\$99",
-                      fontSize: 16.sp,
-                      isBold: true,
-                    ),
-                  ],
-                ),
-              ),
-              Flexible(
-                flex: 3,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(
-                      Icons.delete,
+              Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: IconButton(
+                    onPressed: removeItem,
+                    icon: const Icon(
+                      Icons.delete_outline_rounded,
                       color: Colors.red,
                     ),
-                    CustomButton(
-                      marginHorizntal: 0,
-                      color: const Color(0xffEEEEEE),
-                      onPressed: () {},
-                      title: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          buttonCart(
-                            icon: Icons.remove,
-                            onPressed: () {
-                              // context.read<CartCubit>().decreaseCounter();
-                            },
-                          ),
-                          AppText(
-                            text: "${prodectFromCart.quantity}",
-                            fontSize: 18.sp,
-                          ),
-                          buttonCart(
-                            icon: Icons.add,
-                            onPressed: () {
-                              // context.read<CartCubit>().increaseCounter(index);
-                            },
-                          ),
-                        ],
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 5),
+                child: CustomButton(
+                  marginHorizntal: 0,
+                  color: const Color.fromARGB(255, 239, 237, 237),
+                  onPressed: () {},
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      buttonCart(
+                        icon: Icons.remove,
+                        onPressed: onDecreaseCounter,
                       ),
-                    ),
-                  ],
+                      AppText(
+                        text: "$quantity",
+                        fontSize: 18.sp,
+                      ),
+                      buttonCart(
+                        icon: Icons.add,
+                        onPressed: onPressed,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
-          ),
-        );
-      },
+          )
+        ],
+      ),
     );
   }
 }

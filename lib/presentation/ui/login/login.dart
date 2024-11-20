@@ -2,6 +2,7 @@ import 'package:first_app/core/constant/app_colors.dart';
 import 'package:first_app/core/constant/components/custom_button.dart';
 import 'package:first_app/core/constant/components/custom_text.dart';
 import 'package:first_app/core/enum/enum_status.dart';
+import 'package:first_app/core/root/app_route.dart';
 import 'package:first_app/data/data_source/remote_data_source.dart';
 import 'package:first_app/data/repository/login.dart';
 import 'package:first_app/domain/usecase/login.dart';
@@ -16,14 +17,16 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocProvider<LoginCubit>(
-        create: (context) => LoginCubit(
-          loginUser: LoginUser(
-            LoginRepo(RemoteDataSource()),
+    return SafeArea(
+      child: Scaffold(
+        body: BlocProvider<LoginCubit>(
+          create: (context) => LoginCubit(
+            loginUser: LoginUser(
+              LoginRepo(RemoteDataSource()),
+            ),
           ),
+          child: const BodyLogin(),
         ),
-        child: const BodyLogin(),
       ),
     );
   }
@@ -43,24 +46,35 @@ class BodyLogin extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(
-                height: 20,
-              ),
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: AppText(
-                  text: "WelCome Back !",
-                  isBold: true,
-                  fontSize: 25,
+              IconButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed(AppRoot.sign);
+                },
+                icon: const Icon(
+                  Icons.arrow_back_ios,
                 ),
               ),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: AppText(
-                  text: "Please Login Or Sign up to Continue our App",
-                  isBold: true,
-                  fontSize: 14,
-                  textColor: AppColor.neutralsColor.withOpacity(0.5),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: AppText(
+                    text: "WelCome Back !",
+                    isBold: true,
+                    fontSize: 25,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: AppText(
+                    text: "Please Login Or Sign up to Continue our App",
+                    isBold: true,
+                    fontSize: 14,
+                    textColor: AppColor.neutralsColor.withOpacity(0.5),
+                  ),
                 ),
               ),
               const BodyForm(),
@@ -138,9 +152,11 @@ class BodyLogin extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              const Align(
+              Align(
                 alignment: Alignment.center,
                 child: AppText(
+                  isBold: true,
+                  textColor: AppColor.neutralsColor.withOpacity(.3),
                   text: "Or Log in With ",
                 ),
               ),
@@ -157,15 +173,19 @@ class BodyLogin extends StatelessWidget {
                     onTap: () {
                       context.read<LoginCubit>().navigateToSignUp(context);
                     },
-                    child: const Center(
+                    child: Center(
                       child: Text.rich(
                         TextSpan(
                           children: [
                             TextSpan(
                                 text: "Don`t Have Account ?",
                                 style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 16)),
-                            TextSpan(
+                                  color:
+                                      AppColor.neutralsColor.withOpacity(0.3),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                )),
+                            const TextSpan(
                                 text: " Create account",
                                 style: TextStyle(
                                     color: AppColor.priomaryColorApp,

@@ -21,15 +21,19 @@ class BodyForm extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: AppText(
-                  text: "Email",
-                  textColor: AppColor.neutralsColor.withOpacity(0.5),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: AppText(
+                    text: "Email",
+                    isBold: true,
+                    textColor: AppColor.neutralsColor.withOpacity(0.5),
+                  ),
                 ),
               ),
               CustomTextField(
-                padding: 2,
+                
                 icon: const Icon(Icons.email_outlined),
                 controller: state.emailController,
                 hintText: "mor_2314",
@@ -47,11 +51,15 @@ class BodyForm extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: AppText(
-                  text: "Password",
-                  textColor: AppColor.neutralsColor.withOpacity(0.5),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: AppText(
+                    text: "Password",
+                    isBold: true,
+                    textColor: AppColor.neutralsColor.withOpacity(0.5),
+                  ),
                 ),
               ),
               BlocSelector<LoginCubit, LoginState, bool>(selector: (state) {
@@ -65,7 +73,6 @@ class BodyForm extends StatelessWidget {
                     onPressed: () =>
                         context.read<LoginCubit>().showHidePassword(),
                   ),
-                  padding: 7,
                   icon: const Icon(Icons.lock),
                   controller: state.passwordController,
                   hintText: "83r5^_",

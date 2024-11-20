@@ -21,7 +21,7 @@ class LoginCubit extends Cubit<LoginState> {
         ));
   final LoginUser loginUser;
   navigateToSignUp(BuildContext context) {
-    Navigator.of(context).pushReplacementNamed(AppRoot.sign);
+    Navigator.of(context).pushNamed(AppRoot.sign);
   }
 
   @override
@@ -33,6 +33,7 @@ class LoginCubit extends Cubit<LoginState> {
 
   login(BuildContext context) async {
     if (state.formKey.currentState!.validate()) {
+      if (isClosed) return;
       emit(state.copyWith(
         requestStatus: RequestStatus.loading,
       ));
@@ -43,12 +44,14 @@ class LoginCubit extends Cubit<LoginState> {
           "username": state.emailController.text.trim(),
           "password": state.passwordController.text.trim(),
         };
+        if (isClosed) return;
         emit(state.copyWith(
           isIntenetConection: resultConnect,
           requestStatus: RequestStatus.loading,
         ));
         ResultApi response = await loginUser.login(data);
         if (response.isDone == true) {
+          if (isClosed) return;
           emit(state.copyWith(
             requestStatus: RequestStatus.successful,
           ));
@@ -58,11 +61,13 @@ class LoginCubit extends Cubit<LoginState> {
             (route) => false,
           );
         } else {
+          if (isClosed) return;
           emit(state.copyWith(
             requestStatus: RequestStatus.error,
           ));
         }
       } else {
+        if (isClosed) return;
         emit(state.copyWith(
           requestStatus: RequestStatus.error,
           isIntenetConection: false,

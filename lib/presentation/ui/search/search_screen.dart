@@ -45,68 +45,71 @@ class SearchScreen extends StatelessWidget {
           builder: (context, state) {
             return Column(
               children: [
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 4,
-                      child: Container(
-                        padding: const EdgeInsets.fromLTRB(
-                          16.0,
-                          0,
-                          16.0,
-                          16.0,
-                        ),
-                        color: AppColor.splashColor,
-                        child: DropdownButtonFormField(
-                          value: state.valueDropDown,
-                          onChanged: (value) {
-                            context
-                                .read<SearchCubit>()
-                                .filtterProdectByCategory(value.toString());
-                          },
-                          items: state.category
-                              .map(
-                                (e) => DropdownMenuItem(
-                                  value: e,
-                                  child: AppText(text: e),
-                                ),
-                              )
-                              .toList(),
-                          autofocus: true,
-                          decoration: InputDecoration(
-                            fillColor: Colors.grey.shade100,
-                            prefixIcon: Icon(Icons.search,
-                                color: AppColor.neutralsColor.withOpacity(0.4)),
-                            hintText: "Search your prodects",
-                            hintStyle: TextStyle(
-                              color: AppColor.neutralsColor.withOpacity(0.4),
-                            ),
-                            filled: true,
-                            contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 16.0 * 1.5, vertical: 16.0),
-                            border: const OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 4,
+                        child: Container(
+                          color: AppColor.splashColor,
+                          child: DropdownButtonFormField(
+                            value: state.valueDropDown,
+                            onChanged: (value) {
+                              context
+                                  .read<SearchCubit>()
+                                  .filtterProdectByCategory(value.toString());
+                            },
+                            items: state.category
+                                .map(
+                                  (e) => DropdownMenuItem(
+                                    value: e,
+                                    child: AppText(text: e),
+                                  ),
+                                )
+                                .toList(),
+                            autofocus: true,
+                            decoration: InputDecoration(
+                              fillColor: Colors.grey.shade100,
+                              prefixIcon: Icon(Icons.search,
+                                  color:
+                                      AppColor.neutralsColor.withOpacity(0.4)),
+                              hintText: "Search your prodects",
+                              hintStyle: TextStyle(
+                                color: AppColor.neutralsColor.withOpacity(0.4),
+                              ),
+                              filled: true,
+                              contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 16.0 * 1.5, vertical: 16.0),
+                              border: const OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    CustomButton(
-                      color: Colors.black,
-                      onPressed: () {
-                        context
-                            .read<SearchCubit>()
-                            .navigateToVoiceSearchPage(context);
-                      },
-                      title: const Icon(
-                        Icons.keyboard_voice_outlined,
-                        color: AppColor.splashColor,
-                        size: 30,
+                      const SizedBox(
+                        width: 20,
                       ),
-                    )
-                  ],
+                      CustomButton(
+                        widthContainer: 70,
+                        marginHorizntal: 0,
+                        color: Colors.black,
+                        onPressed: () {
+                          context
+                              .read<SearchCubit>()
+                              .navigateToVoiceSearchPage(context);
+                        },
+                        title: const Icon(
+                          Icons.keyboard_voice_outlined,
+                          color: AppColor.splashColor,
+                          size: 30,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
                 const LabelCategory(
                   title: "Recent Searching",

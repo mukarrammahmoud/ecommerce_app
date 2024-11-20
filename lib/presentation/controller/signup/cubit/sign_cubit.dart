@@ -1,9 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:first_app/core/constant/custom_dialog.dart';
 import 'package:first_app/core/constant/functions/check_internet.dart';
 import 'package:first_app/core/enum/enum_status.dart';
 import 'package:first_app/core/root/app_route.dart';
@@ -56,6 +54,8 @@ class SignCubit extends Cubit<SignState> {
           "username": state.passwordController.text,
           "password": state.confirmPasswordController.text,
         };
+        if (isClosed) return;
+
         emit(state.copyWith(
           requestStatus: RequestStatus.loading,
         ));
@@ -64,33 +64,16 @@ class SignCubit extends Cubit<SignState> {
           emit(state.copyWith(
             requestStatus: RequestStatus.successful,
           ));
-
-          customDialog(
-            context: context,
-            title: 'Create Account',
-            description: 'Created Account Successfuly',
-            btnOkOnPress: () {
-              Navigator.of(context).pushReplacementNamed(
-                AppRoot.login,
-              );
-            },
-          ).show();
         } else {
           emit(state.copyWith(
             requestStatus: RequestStatus.error,
           ));
         }
       } else {
+        if (isClosed) return;
         emit(state.copyWith(
           isIntenetConection: false,
         ));
-        customDialog(
-                dialogType: DialogType.error,
-                context: context,
-                title: "No Conniction",
-                description: "Check The Internet And Try Again",
-                btnOkOnPress: () {})
-            .show();
       }
     }
   }

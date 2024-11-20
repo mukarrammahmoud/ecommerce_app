@@ -21,12 +21,6 @@ class CustomSearchBar extends StatelessWidget {
           Expanded(
             flex: 4,
             child: Container(
-              padding: const EdgeInsets.fromLTRB(
-                16.0,
-                0,
-                16.0,
-                16.0,
-              ),
               color: AppColor.splashColor,
               child: TextFormField(
                 onTap: onTapSearchField,
@@ -52,13 +46,19 @@ class CustomSearchBar extends StatelessWidget {
               ),
             ),
           ),
-          CustomButton(
-            color: Colors.black,
-            onPressed: onPressedButtonVoice,
-            title: const Icon(
-              Icons.keyboard_voice_outlined,
-              color: AppColor.splashColor,
-              size: 30,
+          const SizedBox(
+            width: 22,
+          ),
+          Expanded(
+            child: CustomButton(
+              marginHorizntal: 0,
+              color: Colors.black,
+              onPressed: onPressedButtonVoice,
+              title: const Icon(
+                Icons.keyboard_voice_outlined,
+                color: AppColor.splashColor,
+                size: 30,
+              ),
             ),
           )
         ],

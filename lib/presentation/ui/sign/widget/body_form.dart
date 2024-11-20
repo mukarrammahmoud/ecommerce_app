@@ -21,11 +21,14 @@ class BodyForm extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: AppText(
-                  text: "Email",
-                  textColor: AppColor.neutralsColor.withOpacity(0.5),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: AppText(
+                    text: "Email",
+                    textColor: AppColor.neutralsColor.withOpacity(0.5),
+                  ),
                 ),
               ),
               CustomTextField(
@@ -47,11 +50,14 @@ class BodyForm extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: AppText(
-                  text: "User Name",
-                  textColor: AppColor.neutralsColor.withOpacity(0.5),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: AppText(
+                    text: "User Name",
+                    textColor: AppColor.neutralsColor.withOpacity(0.5),
+                  ),
                 ),
               ),
               CustomTextField(
@@ -70,11 +76,14 @@ class BodyForm extends StatelessWidget {
                   return null;
                 },
               ),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: AppText(
-                  text: " Password",
-                  textColor: AppColor.neutralsColor.withOpacity(0.5),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: AppText(
+                    text: " Password",
+                    textColor: AppColor.neutralsColor.withOpacity(0.5),
+                  ),
                 ),
               ),
               BlocSelector<SignCubit, SignState, bool>(selector: (state) {
@@ -88,7 +97,7 @@ class BodyForm extends StatelessWidget {
                     onPressed: () =>
                         context.read<SignCubit>().showHidePassword(),
                   ),
-                  padding: 7,
+                  padding: 1,
                   icon: const Icon(Icons.lock),
                   controller: state.confirmPasswordController,
                   hintText: "xxxxxxxxxx",

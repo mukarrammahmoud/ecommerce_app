@@ -121,7 +121,7 @@ class RemoteDataSource {
 
   Future<ResultApi> getMyCart() async {
     try {
-      final response = await http.get(Uri.parse(AppUrl.getMyCart));
+      final response = await http.get(Uri.parse(AppUrl.mycart));
 
       if (response.statusCode == 200) {
         return ResultApi(isDone: true, resultOrError: response.body);

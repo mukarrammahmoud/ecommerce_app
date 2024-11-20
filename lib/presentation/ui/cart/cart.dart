@@ -16,11 +16,24 @@ class MyCert extends StatelessWidget {
         return false;
       },
       child: Scaffold(
+        backgroundColor: const Color.fromARGB(255, 244, 242, 242),
         appBar: AppBar(
-          title: const AppText(
-            text: "Cart",
-            fontSize: 25,
-            isBold: true,
+          title: Row(
+            children: [
+              IconButton(
+                onPressed: () {
+                  Navigator.of(context).pushReplacementNamed(AppRoot.home);
+                },
+                icon: const Icon(
+                  Icons.arrow_back_ios,
+                ),
+              ),
+              const AppText(
+                text: "Cart",
+                fontSize: 25,
+                isBold: true,
+              ),
+            ],
           ),
         ),
         body: const CartBody(),

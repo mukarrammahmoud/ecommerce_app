@@ -17,11 +17,25 @@ class WishList extends StatelessWidget {
         return false;
       },
       child: Scaffold(
+        backgroundColor: const Color.fromARGB(240, 255, 255, 255),
         appBar: AppBar(
-          title: const AppText(
-            text: "WishList",
-            fontSize: 25,
-            isBold: true,
+          scrolledUnderElevation: 0,
+          title: Row(
+            children: [
+              IconButton(
+                onPressed: () {
+                  Navigator.of(context).pushReplacementNamed(AppRoot.home);
+                },
+                icon: const Icon(
+                  Icons.arrow_back_ios,
+                ),
+              ),
+              const AppText(
+                text: "WishList",
+                fontSize: 25,
+                isBold: true,
+              ),
+            ],
           ),
         ),
         body: ListView.builder(

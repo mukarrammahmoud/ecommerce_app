@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:first_app/data/data_source/local_data_source.dart';
 import 'package:first_app/data/data_source/remote_data_source.dart';
-import 'package:first_app/data/model/prodect_from_cart_model.dart';
+import 'package:first_app/data/model/cart_model.dart';
 import 'package:first_app/data/model/result_api.dart';
 
 class CartRepo {
@@ -29,12 +29,12 @@ class CartRepo {
     ResultApi resultApi = await remoteDataSource.getMyCart();
 
     if (resultApi.isDone) {
-      List dataJsonList = List.from(jsonDecode(resultApi.resultOrError));
-    
-      List<ProdectFromCartModel> prodectOfCart = [];
+      Map<String, dynamic> dataJsonList = jsonDecode(resultApi.resultOrError);
+     
+      List<Product> prodectOfCart = [];
 
-      for (var element in dataJsonList[0]['products']) {
-        prodectOfCart.add(ProdectFromCartModel.fromJson(element));
+      for (var element in dataJsonList['products']) {
+        prodectOfCart.add(Product.fromJson(element));
       }
       return ResultApi(isDone: true, resultOrError: prodectOfCart);
     } else {

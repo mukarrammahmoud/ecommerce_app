@@ -14,4 +14,5 @@ class AppImages {
   static const String rang = "assets/image/rang.png";
   static const String lap = "assets/image/lap.png";
   static const String women = "assets/image/women.png";
+  static const String loadingAnimation = "assets/lottie/load.json";
 }

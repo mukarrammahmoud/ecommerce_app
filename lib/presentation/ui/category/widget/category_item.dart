@@ -54,10 +54,22 @@ class CategoryItems extends StatelessWidget {
             bottom: -20,
             right: MediaQuery.sizeOf(context).width * .1,
             child: Align(
-              alignment: Alignment.bottomCenter,
+              alignment: Alignment.center,
               child: AppText(
                 text: category,
                 isBold: true,
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: -40,
+            right: MediaQuery.sizeOf(context).width * .1,
+            child: Align(
+              alignment: Alignment.center,
+              child: AppText(
+                text: " 250 Prodects",
+                isBold: true,
+                textColor: AppColor.neutralsColor.withOpacity(.3),
               ),
             ),
           ),

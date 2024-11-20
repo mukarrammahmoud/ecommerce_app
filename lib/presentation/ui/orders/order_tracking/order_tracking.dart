@@ -20,23 +20,24 @@ class OrderTracking extends StatelessWidget {
         body: ListView(
           children: [
             SizedBox(
-              height: 80,
+              height: 100,
               child: ListView.builder(
-                itemCount: 4,
+                itemCount: 3,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
                   return Container(
-                    margin: const EdgeInsets.all(10),
-                    padding: const EdgeInsets.all(5),
+                    // width: 100,
+                    height: 100,
+                    padding: const EdgeInsets.all(8),
+                    margin: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: AppColor.successColor,
-                      borderRadius: BorderRadius.circular(5),
+                      color: index % 2 == 0
+                          ? AppColor.warrningColor.withOpacity(.5)
+                          : Colors.grey.shade300,
+                      borderRadius: BorderRadius.circular(10),
                     ),
                     child: Image.asset(
-                      AppImages.shirt,
-                      fit: BoxFit.cover,
-                      height: 60,
-                      width: 60,
+                      index % 2 == 0 ? AppImages.ja : AppImages.rang,
                     ),
                   );
                 },
